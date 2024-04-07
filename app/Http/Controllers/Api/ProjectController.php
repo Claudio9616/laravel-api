@@ -31,9 +31,12 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show(string $id)
     {
-        //
+        $project = Project::find($id);
+        // Questo controllo è importante perchè se non trovo l'item che sto crecando rispondo con pagina vuota e codice 404, da gestire su vue
+        if(!$project) return response(null, 404);
+        return response()->json($project);
     }
 
     /**
